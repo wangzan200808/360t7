@@ -57,26 +57,26 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        git clone $REPO_URL -b $REPO_BRANCH immortalwrt-mt798x
-        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/immortalwrt-mt798x
+        git clone $REPO_URL -b $REPO_BRANCH openwrt
+        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
     - name: Load custom feeds
       run: |
-        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF immortalwrt-mt798x/feeds.conf.default
+        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
         chmod +x $DIY_P1_SH
-        cd immortalwrt-mt798x
+        cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
     - name: Update feeds
-      run: cd immortalwrt-mt798x && ./scripts/feeds update -a
+      run: cd openwrt && ./scripts/feeds update -a
 
     - name: Install feeds
-      run: cd immortalwrt-mt798x && ./scripts/feeds install -a
+      run: cd openwrt && ./scripts/feeds install -a
 
     - name: Load custom configuration
       run: |
-        [ -e files ] && mv files immortalwrt-mt798x/files
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE immortalwrt-mt798x/.config
+        [ -e files ] && mv files openwrt/files
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $DIY_P2_SH
-        cd immortalwrt-mt798x
+        cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
@@ -88,7 +88,7 @@ jobs:
     - name: Download package
       id: package
       run: |
-        cd immortalwrt-mt798x
+        cd openwrt
         make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
@@ -96,7 +96,7 @@ jobs:
     - name: Compile the firmware
       id: compile
       run: |
-        cd immortalwrt-mt798x
+        cd openwet
         echo -e "$(nproc) thread compile"
         make -j$(nproc) || make -j1 || make -j1 V=s
         echo "status=success" >> $GITHUB_OUTPUT
