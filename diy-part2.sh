@@ -58,6 +58,7 @@ cat > version.patch  <<EOF
 +OPENWRT_RELEASE="%D $VERSION By Zan %C"
 EOF
 
+cat > default.patch  <<EOF
 --- a/package/base-files/files/bin/config_generate
 +++ b/package/base-files/files/bin/config_generate
 @@ -162,8 +162,8 @@
@@ -133,3 +134,4 @@ EOF
  	EOF
  
  	if json_is_a system object; then
+EOF
