@@ -65,8 +65,8 @@ done
 rm -f Patch-*.patch
 
 sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
-sed -i 's/hostname='.*'/hostname='T7'/g' package/base-files/files/bin/config_generate
-sed -i 's/timezone='.*'/timezone='HKT-8'/g' package/base-files/files/bin/config_generate
+sed -i 's/hostname='ImmortalWrt'/hostname='T7'/g' package/base-files/files/bin/config_generate
+sed -i 's/timezone='UTC'/timezone='HKT-8'/g' package/base-files/files/bin/config_generate
 sed -i '/set system.@system[-1].zonename='Asia/Hong Kong'' package/base-files/files/bin/config_generate
 sed -i 's/add_list system.ntp.server='time1.apple.com'/add_list system.ntp.server='ntp.aliyun.com'/g' package/base-files/files/bin/config_generate
 sed -i 's/add_list system.ntp.server='time1.google.com'/add_list system.ntp.server='time2.cloud.tencent.com'/g' package/base-files/files/bin/config_generate
