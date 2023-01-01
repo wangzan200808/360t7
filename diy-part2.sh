@@ -136,4 +136,9 @@ cat > default.patch  <<EOF
  	if json_is_a system object; then
 EOF
 
+
+patch -p1 -E < default.patch && patch -p1 -E < version.patch && rm -f default.patch version.patch
+for i in $(find -maxdepth 1 -name 'Patch-*.patch' | sed 's#.*/##');do
+	patch -p1 -E < $i
+done
 rm -f Patch-*.patch
