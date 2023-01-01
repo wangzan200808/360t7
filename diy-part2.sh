@@ -56,83 +56,6 @@ cat > version.patch  <<EOF
  OPENWRT_DEVICE_REVISION="%h"
 -OPENWRT_RELEASE="%D %V %C"
 +OPENWRT_RELEASE="%D $VERSION By Zan %C"
-
---- a/package/base-files/files/bin/config_generate
-+++ b/package/base-files/files/bin/config_generate
-@@ -162,8 +162,8 @@
- 		static)
- 			local ipad
- 			case "$1" in
--				lan) ipad=${ipaddr:-"192.168.1.1"} ;;
--				*) ipad=${ipaddr:-"192.168.$((addr_offset++)).1"} ;;
-+				lan) ipad=${ipaddr:-"10.0.0.1"} ;;
-+				*) ipad=${ipaddr:-"10.0.$((addr_offset++)).1"} ;;
- 			esac
- 
- 			netm=${netmask:-"255.255.255.0"}
-@@ -177,18 +177,6 @@
- 		;;
- 
- 		dhcp)
--			# fixup IPv6 slave interface if parent is a bridge
--			[ "$type" = "bridge" ] && device="br-$1"
--
--			uci set network.$1.proto='dhcp'
--			[ -e /proc/sys/net/ipv6 ] && {
--				uci -q batch <<-EOF
--					delete network.${1}6
--					set network.${1}6='interface'
--					set network.${1}6.device='$device'
--					set network.${1}6.proto='dhcpv6'
--				EOF
--			}
- 		;;
- 
- 		pppoe)
-@@ -197,16 +185,6 @@
- 				set network.$1.username='username'
- 				set network.$1.password='password'
- 			EOF
--			[ -e /proc/sys/net/ipv6 ] && {
--				uci -q batch <<-EOF
--					set network.$1.ipv6='1'
--					delete network.${1}6
--					set network.${1}6='interface'
--					set network.${1}6.device='@${1}'
--					set network.${1}6.proto='dhcpv6'
--				EOF
--			}
--		;;
- 	esac
- }
- 
-@@ -302,8 +280,9 @@
- 	uci -q batch <<-EOF
- 		delete system.@system[0]
- 		add system system
--		set system.@system[-1].hostname='ImmortalWrt'
--		set system.@system[-1].timezone='UTC'
-+		set system.@system[-1].hostname='T7'
-+		set system.@system[-1].zonename='Asia/Hong Kong'
-+		set system.@system[-1].timezone='HKT-8'
- 		set system.@system[-1].ttylogin='0'
- 		set system.@system[-1].log_size='512'
- 		set system.@system[-1].urandom_seed='0'
-@@ -311,11 +290,9 @@
- 		delete system.ntp
- 		set system.ntp='timeserver'
- 		set system.ntp.enabled='1'
--		set system.ntp.enable_server='0'
--		add_list system.ntp.server='time1.apple.com'
--		add_list system.ntp.server='time1.google.com'
--		add_list system.ntp.server='time.cloudflare.com'
--		add_list system.ntp.server='pool.ntp.org'
-+		set system.ntp.enable_server='1'
-+		add_list system.ntp.server='ntp.aliyun.com'
-+		add_list system.ntp.server='time2.cloud.tencent.com'
- 	EOF
- 
- 	if json_is_a system object; then
 EOF
 
 patch -p1 -E < version.patch && rm -f version.patch
@@ -140,3 +63,10 @@ for i in $(find -maxdepth 1 -name 'Patch-*.patch' | sed 's#.*/##');do
 	patch -p1 -E < $i
 done
 rm -f Patch-*.patch
+
+sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
+sed -i "s/hostname='.*'/hostname='T7'/g" package/base-files/files/bin/config_generate
+sed -i "s/timezone='.*'/timezone='HKT-8'/g" package/base-files/files/bin/config_generate
+sed -i "/set system.@system[-1].zonename='Asia/Hong Kong'" package/base-files/files/bin/config_generate
+sed -i "s/add_list system.ntp.server='time1.apple.com'/add_list system.ntp.server='ntp.aliyun.com'/g" package/base-files/files/bin/config_generate
+sed -i "s/add_list system.ntp.server='time1.google.com'/add_list system.ntp.server='time2.cloud.tencent.com'/g" package/base-files/files/bin/config_generate
