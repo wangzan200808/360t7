@@ -62,16 +62,16 @@ cat > default.patch  <<EOF
 --- a/package/base-files/files/bin/config_generate
 +++ b/package/base-files/files/bin/config_generate
 @@ -162,8 +162,8 @@
-		static)
-			local ipad
-			case "$1" in
+ 		static)
+ 			local ipad
+ 			case "$1" in
 -				lan) ipad=${ipaddr:-"192.168.1.1"} ;;
 -				*) ipad=${ipaddr:-"192.168.$((addr_offset++)).1"} ;;
 +				lan) ipad=${ipaddr:-"10.0.0.2"} ;;
 +				*) ipad=${ipaddr:-"10.0.$((addr_offset++)).1"} ;;
-			esac
-
-			netm=${netmask:-"255.255.255.0"}
+ 			esac
+ 
+ 			netm=${netmask:-"255.255.255.0"}
 @@ -177,18 +177,7 @@
  		;;
  
@@ -91,11 +91,9 @@ cat > default.patch  <<EOF
  		;;
  
  		pppoe)
-@@ -196,16 +185,8 @@
- 				set network.$1.proto='pppoe'
+@@ -197,16 +186,6 @@
  				set network.$1.username='username'
  				set network.$1.password='password'
-+				set network.$1.ipv6='auto'
  			EOF
 -			[ -e /proc/sys/net/ipv6 ] && {
 -				uci -q batch <<-EOF
@@ -106,28 +104,31 @@ cat > default.patch  <<EOF
 -					set network.${1}6.proto='dhcpv6'
 -				EOF
 -			}
- 		;;
+-		;;
+ 	esac
+ }
  
- 		qmi|\
-@@ -311,7 +292,8 @@
+@@ -302,8 +281,9 @@
+ 	uci -q batch <<-EOF
  		delete system.@system[0]
  		add system system
- 		set system.@system[-1].hostname='OpenWrt'
+-		set system.@system[-1].hostname='ImmortalWrt'
 -		set system.@system[-1].timezone='UTC'
++		set system.@system[-1].hostname='T7'
 +		set system.@system[-1].zonename='Asia/Hong Kong'
 +		set system.@system[-1].timezone='HKT-8'
  		set system.@system[-1].ttylogin='0'
- 		set system.@system[-1].log_size='64'
+ 		set system.@system[-1].log_size='512'
  		set system.@system[-1].urandom_seed='0'
-@@ -319,11 +301,9 @@
+@@ -311,11 +291,9 @@
  		delete system.ntp
  		set system.ntp='timeserver'
  		set system.ntp.enabled='1'
 -		set system.ntp.enable_server='0'
--		add_list system.ntp.server='0.openwrt.pool.ntp.org'
--		add_list system.ntp.server='1.openwrt.pool.ntp.org'
--		add_list system.ntp.server='2.openwrt.pool.ntp.org'
--		add_list system.ntp.server='3.openwrt.pool.ntp.org'
+-		add_list system.ntp.server='time1.apple.com'
+-		add_list system.ntp.server='time1.google.com'
+-		add_list system.ntp.server='time.cloudflare.com'
+-		add_list system.ntp.server='pool.ntp.org'
 +		set system.ntp.enable_server='1'
 +		add_list system.ntp.server='ntp1.aliyun.com'
 +		add_list system.ntp.server='time2.cloud.tencent.com'
