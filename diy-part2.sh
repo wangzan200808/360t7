@@ -67,19 +67,19 @@ cat > default.patch  <<EOF
  			case "$1" in
 -				lan) ipad=${ipaddr:-"192.168.1.1"} ;;
 -				*) ipad=${ipaddr:-"192.168.$((addr_offset++)).1"} ;;
-+				lan) ipad=${ipaddr:-"10.0.0.2"} ;;
++				lan) ipad=${ipaddr:-"10.0.0.1"} ;;
 +				*) ipad=${ipaddr:-"10.0.$((addr_offset++)).1"} ;;
  			esac
  
  			netm=${netmask:-"255.255.255.0"}
-@@ -177,18 +177,7 @@
+@@ -177,18 +177,6 @@
  		;;
  
  		dhcp)
 -			# fixup IPv6 slave interface if parent is a bridge
 -			[ "$type" = "bridge" ] && device="br-$1"
 -
- 			uci set network.$1.proto='dhcp'
+-			uci set network.$1.proto='dhcp'
 -			[ -e /proc/sys/net/ipv6 ] && {
 -				uci -q batch <<-EOF
 -					delete network.${1}6
@@ -91,7 +91,7 @@ cat > default.patch  <<EOF
  		;;
  
  		pppoe)
-@@ -197,16 +186,6 @@
+@@ -197,16 +185,6 @@
  				set network.$1.username='username'
  				set network.$1.password='password'
  			EOF
@@ -108,7 +108,7 @@ cat > default.patch  <<EOF
  	esac
  }
  
-@@ -302,8 +281,9 @@
+@@ -302,8 +280,9 @@
  	uci -q batch <<-EOF
  		delete system.@system[0]
  		add system system
@@ -116,11 +116,11 @@ cat > default.patch  <<EOF
 -		set system.@system[-1].timezone='UTC'
 +		set system.@system[-1].hostname='T7'
 +		set system.@system[-1].zonename='Asia/Hong Kong'
-+		set system.@system[-1].timezone='HKT-8'
++		set system.@system[-1].timezone="HKT-8"
  		set system.@system[-1].ttylogin='0'
  		set system.@system[-1].log_size='512'
  		set system.@system[-1].urandom_seed='0'
-@@ -311,11 +291,9 @@
+@@ -311,11 +290,9 @@
  		delete system.ntp
  		set system.ntp='timeserver'
  		set system.ntp.enabled='1'
@@ -130,13 +130,12 @@ cat > default.patch  <<EOF
 -		add_list system.ntp.server='time.cloudflare.com'
 -		add_list system.ntp.server='pool.ntp.org'
 +		set system.ntp.enable_server='1'
-+		add_list system.ntp.server='ntp1.aliyun.com'
++		add_list system.ntp.server='ntp.aliyun.com'
 +		add_list system.ntp.server='time2.cloud.tencent.com'
  	EOF
  
  	if json_is_a system object; then
 EOF
-
 
 patch -p1 -E < default.patch && patch -p1 -E < version.patch && rm -f default.patch version.patch
 for i in $(find -maxdepth 1 -name 'Patch-*.patch' | sed 's#.*/##');do
