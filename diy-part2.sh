@@ -114,7 +114,7 @@ cat > version.patch  <<EOF
 -		set system.@system[-1].timezone='UTC'
 +		set system.@system[-1].hostname='T7'
 +		set system.@system[-1].zonename='Asia/Hong Kong'
-+		set system.@system[-1].timezone="HKT-8"
++		set system.@system[-1].timezone='HKT-8'
  		set system.@system[-1].ttylogin='0'
  		set system.@system[-1].log_size='512'
  		set system.@system[-1].urandom_seed='0'
