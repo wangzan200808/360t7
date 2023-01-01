@@ -135,3 +135,5 @@ cat > default.patch  <<EOF
  
  	if json_is_a system object; then
 EOF
+
+rm -f Patch-*.patch
