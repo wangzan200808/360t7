@@ -58,7 +58,7 @@ cat > version.patch  <<EOF
 +OPENWRT_RELEASE="%D $VERSION By Zan %C"
 EOF
 
-patch -p1 -E < default.patch && patch -p1 -E < version.patch && rm -f default.patch version.patch
+patch -p1 -E < version.patch && rm -f version.patch
 for i in $(find -maxdepth 1 -name 'Patch-*.patch' | sed 's#.*/##');do
 	patch -p1 -E < $i
 done
