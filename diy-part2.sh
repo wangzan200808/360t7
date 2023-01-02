@@ -64,7 +64,7 @@ for i in $(find -maxdepth 1 -name 'Patch-*.patch' | sed 's#.*/##');do
 done
 rm -f Patch-*.patch
 
-sed -i "s/192.168.1.1/10.0.0.1/g" package/base-files/files/bin/config_generate
+sed -i "s/192.168.1.1/10.0.0.2/g" package/base-files/files/bin/config_generate
 sed -i "s/hostname='ImmortalWrt'/hostname='T7'/g" package/base-files/files/bin/config_generate
 sed -i "s/timezone='UTC'/timezone='HKT-8'/g" package/base-files/files/bin/config_generate
 sed -i "s/add_list system.ntp.server='time1.apple.com'/add_list system.ntp.server='ntp.aliyun.com'/g" package/base-files/files/bin/config_generate
