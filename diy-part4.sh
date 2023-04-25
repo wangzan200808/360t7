@@ -14,15 +14,6 @@ VERSION="V3.4"
 
 
 cat > version.patch  <<EOF
---- a/feeds/luci/modules/luci-base/root/etc/config/luci
-+++ b/feeds/luci/modules/luci-base/root/etc/config/luci
-@@ -1,4 +1,4 @@
- config core main
- 	option lang auto
--	option mediaurlbase /luci-static/bootstrap
-+	option mediaurlbase /luci-static/design
- 	option resourcebase /luci-static/resources
-
 --- a/package/base-files/files/etc/banner
 +++ b/package/base-files/files/etc/banner
 @@ -4,5 +4,5 @@
@@ -78,3 +69,5 @@ sed -i "s/hostname='ImmortalWrt'/hostname='T7'/g" package/base-files/files/bin/c
 sed -i "s/timezone='UTC'/timezone='HKT-8'/g" package/base-files/files/bin/config_generate
 sed -i "s/add_list system.ntp.server='time1.apple.com'/add_list system.ntp.server='ntp.aliyun.com'/g" package/base-files/files/bin/config_generate
 sed -i "s/add_list system.ntp.server='time1.google.com'/add_list system.ntp.server='time2.cloud.tencent.com'/g" package/base-files/files/bin/config_generate
+git clone https://github.com/gngpp/luci-theme-design.git  package/luci-theme-design
+sed -i 's/luci-theme-bootstrap/luci-theme-design/g' ./feeds/luci/collections/luci/Makefile
