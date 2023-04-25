@@ -22,14 +22,14 @@ cat > version.patch  <<EOF
 -	option mediaurlbase /luci-static/bootstrap
 +	option mediaurlbase /luci-static/design
  	option resourcebase /luci-static/resources
- 	option ubuspath /ubus/
  	
+ config extern flash_keep	
 
 --- a/package/base-files/files/etc/banner
 +++ b/package/base-files/files/etc/banner
-@@ -5,5 +5,5 @@
- |___|__|_|  /__|_|  /\____/|__|   |__| (____  /____/
-           \/      \/  BE FREE AND UNAFRAID  \/
+@@ -4,5 +4,5 @@
+  |_______||   __|_____|__|__||________||__|  |____|
+           |__| W I R E L E S S   F R E E D O M
   -----------------------------------------------------
 - %D %V, %C
 + %D $VERSION By Zan, %C
