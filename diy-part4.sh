@@ -16,14 +16,12 @@ VERSION="V3.4"
 cat > version.patch  <<EOF
 --- a/feeds/luci/modules/luci-base/root/etc/config/luci
 +++ b/feeds/luci/modules/luci-base/root/etc/config/luci
-@@ -1,6 +1,6 @@
+@@ -1,4 +1,4 @@
  config core main
  	option lang auto
 -	option mediaurlbase /luci-static/bootstrap
 +	option mediaurlbase /luci-static/design
  	option resourcebase /luci-static/resources
- 	
- config extern flash_keep	
 
 --- a/package/base-files/files/etc/banner
 +++ b/package/base-files/files/etc/banner
