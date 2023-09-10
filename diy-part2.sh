@@ -10,15 +10,15 @@
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
 
-VERSION="V3.4"
+VERSION="V4.1"
 
 
 cat > version.patch  <<EOF
 --- a/package/base-files/files/etc/banner
 +++ b/package/base-files/files/etc/banner
-@@ -5,5 +5,5 @@
- |___|__|_|  /__|_|  /\____/|__|   |__| (____  /____/
-           \/      \/  BE FREE AND UNAFRAID  \/
+@@ -4,5 +4,5 @@
+  |_______||   __|_____|__|__||________||__|  |____|
+           |__| W I R E L E S S   F R E E D O M
   -----------------------------------------------------
 - %D %V, %C
 + %D $VERSION By Zan, %C
@@ -64,8 +64,10 @@ for i in $(find -maxdepth 1 -name 'Patch-*.patch' | sed 's#.*/##');do
 done
 rm -f Patch-*.patch
 
-sed -i "s/192.168.1.1/10.0.0.2/g" package/base-files/files/bin/config_generate
+sed -i "s/192.168.6.1/10.0.0.2/g" package/base-files/files/bin/config_generate
 sed -i "s/hostname='ImmortalWrt'/hostname='T7'/g" package/base-files/files/bin/config_generate
 sed -i "s/timezone='UTC'/timezone='HKT-8'/g" package/base-files/files/bin/config_generate
 sed -i "s/add_list system.ntp.server='time1.apple.com'/add_list system.ntp.server='ntp.aliyun.com'/g" package/base-files/files/bin/config_generate
 sed -i "s/add_list system.ntp.server='time1.google.com'/add_list system.ntp.server='time2.cloud.tencent.com'/g" package/base-files/files/bin/config_generate
+git clone https://github.com/gngpp/luci-theme-design.git  package/luci-theme-design
+sed -i 's/luci-theme-bootstrap/luci-theme-design/g' ./feeds/luci/collections/luci/Makefile
