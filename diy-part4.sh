@@ -10,7 +10,7 @@
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
 
-VERSION="V3.4"
+VERSION="V4.1"
 
 
 cat > version.patch  <<EOF
