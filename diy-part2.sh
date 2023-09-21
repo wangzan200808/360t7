@@ -16,9 +16,9 @@ VERSION="V4.1"
 cat > version.patch  <<EOF
 --- a/package/base-files/files/etc/banner
 +++ b/package/base-files/files/etc/banner
-@@ -4,5 +4,5 @@
-  |_______||   __|_____|__|__||________||__|  |____|
-           |__| W I R E L E S S   F R E E D O M
+@@ -5,5 +5,5 @@
+ |___|__|_|  /__|_|  /\____/|__|   |__| (____  /____/
+           \/      \/  BE FREE AND UNAFRAID  \/
   -----------------------------------------------------
 - %D %V, %C
 + %D $VERSION By Zan, %C
@@ -56,6 +56,20 @@ cat > version.patch  <<EOF
  OPENWRT_DEVICE_REVISION="%h"
 -OPENWRT_RELEASE="%D %V %C"
 +OPENWRT_RELEASE="%D $VERSION By Zan %C"
+
+--- a/package/mtk/drivers/mt_wifi/Makefile
++++ b/package/mtk/drivers/mt_wifi/Makefile
+@@ -20,8 +20,8 @@
+ endif
+ 
+ PKG_BUILD_DEPENDS:=warp
+-PKG_SOURCE:=mt798x-7.6.6.1-src.tar.xz
+-PKG_VERSION:=7.6.6.1-$(PKG_SUFFIX)
++PKG_SOURCE:=mt7986-7.6.7.0-20221209-b9c02f-obj.tar.xz
++PKG_VERSION:=7.6.7.0-$(PKG_SUFFIX)
+ 
+ PKG_BUILD_PARALLEL:=1
+ PKG_BUILD_DIR:=$(KERNEL_BUILD_DIR)/$(PKG_NAME)
 EOF
 
 patch -p1 -E < version.patch && rm -f version.patch
