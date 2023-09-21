@@ -56,20 +56,6 @@ cat > version.patch  <<EOF
  OPENWRT_DEVICE_REVISION="%h"
 -OPENWRT_RELEASE="%D %V %C"
 +OPENWRT_RELEASE="%D $VERSION By Zan %C"
-
---- a/package/mtk/drivers/mt_wifi/Makefile
-+++ b/package/mtk/drivers/mt_wifi/Makefile
-@@ -20,8 +20,8 @@
- endif
- 
- PKG_BUILD_DEPENDS:=warp
--PKG_SOURCE:=mt798x-7.6.6.1-src.tar.xz
--PKG_VERSION:=7.6.6.1-$(PKG_SUFFIX)
-+PKG_SOURCE:=mt7986-7.6.7.0-20221209-b9c02f-obj.tar.xz
-+PKG_VERSION:=7.6.7.0-$(PKG_SUFFIX)
- 
- PKG_BUILD_PARALLEL:=1
- PKG_BUILD_DIR:=$(KERNEL_BUILD_DIR)/$(PKG_NAME)
 EOF
 
 patch -p1 -E < version.patch && rm -f version.patch
@@ -85,3 +71,5 @@ sed -i "s/add_list system.ntp.server='time1.apple.com'/add_list system.ntp.serve
 sed -i "s/add_list system.ntp.server='time1.google.com'/add_list system.ntp.server='time2.cloud.tencent.com'/g" package/base-files/files/bin/config_generate
 git clone -b js https://github.com/papagaye744/luci-theme-design.git  package/luci-theme-design
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
+sed -i "s/PKG_SOURCE:=mt7986-7.6.7.0-20221209-b9c02f-obj.tar.xz/PKG_SOURCE:=mt798x-7.6.6.1-src.tar.xz/g" package/mtk/drivers/mt_wifi/Makefile
+sed -i "s/PKG_VERSION:=7.6.7.0-$(PKG_SUFFIX)/PKG_VERSION:=7.6.6.1-$(PKG_SUFFIX)/g" package/mtk/drivers/mt_wifi/Makefile
