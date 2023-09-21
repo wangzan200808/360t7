@@ -69,5 +69,5 @@ sed -i "s/hostname='ImmortalWrt'/hostname='T7'/g" package/base-files/files/bin/c
 sed -i "s/timezone='UTC'/timezone='HKT-8'/g" package/base-files/files/bin/config_generate
 sed -i "s/add_list system.ntp.server='time1.apple.com'/add_list system.ntp.server='ntp.aliyun.com'/g" package/base-files/files/bin/config_generate
 sed -i "s/add_list system.ntp.server='time1.google.com'/add_list system.ntp.server='time2.cloud.tencent.com'/g" package/base-files/files/bin/config_generate
-git clone https://github.com/gngpp/luci-theme-design.git  package/luci-theme-design
+git clone -b js https://github.com/papagaye744/luci-theme-design.git  package/luci-theme-design
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
