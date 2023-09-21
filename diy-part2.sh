@@ -72,4 +72,4 @@ sed -i "s/add_list system.ntp.server='time1.google.com'/add_list system.ntp.serv
 git clone -b js https://github.com/papagaye744/luci-theme-design.git  package/luci-theme-design
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
 sed -i "s/PKG_SOURCE:=mt7986-7.6.7.0-20221209-b9c02f-obj.tar.xz/PKG_SOURCE:=mt798x-7.6.6.1-src.tar.xz/g" package/mtk/drivers/mt_wifi/Makefile
-sed -i "s/PKG_VERSION:=7.6.7.0-$(PKG_SUFFIX)/PKG_VERSION:=7.6.6.1-$(PKG_SUFFIX)/g" package/mtk/drivers/mt_wifi/Makefile
+sed -i "s/PKG_VERSION:=7.6.7.0/PKG_VERSION:=7.6.6.1/g" package/mtk/drivers/mt_wifi/Makefile
