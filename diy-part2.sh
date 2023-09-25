@@ -71,5 +71,3 @@ sed -i "s/add_list system.ntp.server='time1.apple.com'/add_list system.ntp.serve
 sed -i "s/add_list system.ntp.server='time1.google.com'/add_list system.ntp.server='time2.cloud.tencent.com'/g" package/base-files/files/bin/config_generate
 git clone -b js https://github.com/papagaye744/luci-theme-design.git  package/luci-theme-design
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
-sed -i "s/PKG_SOURCE:=mt798x-7.6.6.1-src.tar.xz/PKG_SOURCE:=mt7986-7.6.7.0-20221209-b9c02f-obj.tar.xz/g" package/mtk/drivers/mt_wifi/Makefile
-sed -i "s/PKG_VERSION:=7.6.6.1/PKG_VERSION:=7.6.7.0/g" package/mtk/drivers/mt_wifi/Makefile
