@@ -69,9 +69,11 @@ sed -i "s/hostname='ImmortalWrt'/hostname='T360'/g" package/base-files/files/bin
 sed -i "s/timezone='UTC'/timezone='HKT-8'/g" package/base-files/files/bin/config_generate
 sed -i "s/add_list system.ntp.server='time1.apple.com'/add_list system.ntp.server='ntp.aliyun.com'/g" package/base-files/files/bin/config_generate
 sed -i "s/add_list system.ntp.server='time1.google.com'/add_list system.ntp.server='time2.cloud.tencent.com'/g" package/base-files/files/bin/config_generate
-sed -i "s/ImmortalWrt-2.4G/3602.4/g" package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
-sed -i "s/ImmortalWrt-5G/360/g" package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
+
 git clone -b js https://github.com/papagaye744/luci-theme-design.git  package/luci-theme-design
+
+# sed -i "s/ImmortalWrt-2.4G/3602.4/g" package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
+# sed -i "s/ImmortalWrt-5G/360/g" package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 
 # sed -i '52a\set wireless.default_MT7981_1_1.encryption=psk-mixed' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 # sed -i '53a\set set wireless.default_MT7981_1_1.key=wz123456' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
