@@ -81,4 +81,4 @@ git clone -b js https://github.com/papagaye744/luci-theme-design.git  package/lu
 # sed -i '55a\set set wireless.default_MT7981_1_2.key=wz123456' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 # sed '52d' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 
-# sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
