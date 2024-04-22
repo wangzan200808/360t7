@@ -16,9 +16,9 @@ VERSION="V4.1"
 cat > version.patch  <<EOF
 --- a/package/base-files/files/etc/banner
 +++ b/package/base-files/files/etc/banner
-@@ -4,5 +4,5 @@
-  |_______||   __|_____|__|__||________||__|  |____|
-           |__| W I R E L E S S   F R E E D O M
+@@ -5,5 +5,5 @@
+ |___|__|_|  /__|_|  /\____/|__|   |__| (____  /____/
+           \/      \/  BE FREE AND UNAFRAID  \/
   -----------------------------------------------------
 - %D %V, %C
 + %D $VERSION By Zan, %C
@@ -65,9 +65,20 @@ done
 rm -f Patch-*.patch
 
 sed -i "s/192.168.6.1/10.0.0.2/g" package/base-files/files/bin/config_generate
-sed -i "s/hostname='ImmortalWrt'/hostname='T7'/g" package/base-files/files/bin/config_generate
+sed -i "s/hostname='ImmortalWrt'/hostname='T360'/g" package/base-files/files/bin/config_generate
 sed -i "s/timezone='UTC'/timezone='HKT-8'/g" package/base-files/files/bin/config_generate
 sed -i "s/add_list system.ntp.server='time1.apple.com'/add_list system.ntp.server='ntp.aliyun.com'/g" package/base-files/files/bin/config_generate
 sed -i "s/add_list system.ntp.server='time1.google.com'/add_list system.ntp.server='time2.cloud.tencent.com'/g" package/base-files/files/bin/config_generate
-git clone https://github.com/gngpp/luci-theme-design.git  package/luci-theme-design
-sed -i 's/luci-theme-bootstrap/luci-theme-design/g' ./feeds/luci/collections/luci/Makefile
+
+git clone -b js https://github.com/papagaye744/luci-theme-design.git  package/luci-theme-design
+
+# sed -i "s/ImmortalWrt-2.4G/3602.4/g" package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
+# sed -i "s/ImmortalWrt-5G/360/g" package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
+
+# sed -i '52a\set wireless.default_MT7981_1_1.encryption=psk-mixed' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
+# sed -i '53a\set set wireless.default_MT7981_1_1.key=wz123456' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
+# sed -i '54a\set wireless.default_MT7981_1_2.encryption=sae-mixed' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
+# sed -i '55a\set set wireless.default_MT7981_1_2.key=wz123456' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
+# sed '52d' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
+
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
