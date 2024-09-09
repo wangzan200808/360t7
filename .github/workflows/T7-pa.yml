@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: T7-luci18
+name: T7-pa
 
 on:
   repository_dispatch:
