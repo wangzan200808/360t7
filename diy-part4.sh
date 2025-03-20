@@ -10,7 +10,7 @@
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
 
-VERSION="V4.1"
+VERSION="V5.0"
 
 
 cat > version.patch  <<EOF
@@ -50,12 +50,13 @@ cat > version.patch  <<EOF
  VERSION_ID="%v"
  HOME_URL="%u"
  BUG_URL="%b"
-@@ -15,4 +15,4 @@
+@@ -15,5 +15,5 @@
  OPENWRT_DEVICE_MANUFACTURER_URL="%m"
  OPENWRT_DEVICE_PRODUCT="%P"
  OPENWRT_DEVICE_REVISION="%h"
 -OPENWRT_RELEASE="%D %V %C"
 +OPENWRT_RELEASE="%D $VERSION By Zan %C"
+ OPENWRT_BUILD_DATE="%B"
 EOF
 
 patch -p1 -E < version.patch && rm -f version.patch
