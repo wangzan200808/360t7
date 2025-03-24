@@ -57,6 +57,7 @@ cat > version.patch  <<EOF
 -OPENWRT_RELEASE="%D %V %C"
 +OPENWRT_RELEASE="%D $VERSION By Zan %C"
  OPENWRT_BUILD_DATE="%B"
+
 --- a/package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 +++ b/package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 @@ -20,17 +20,21 @@
