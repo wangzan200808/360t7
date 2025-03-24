@@ -86,15 +86,12 @@ cat > version.patch  <<EOF
  					txpower="100"
  					dbdc_main="0"
  				fi
-@@ -54,7 +58,7 @@
+@@ -54,5 +58,5 @@
  					set wireless.default_${dev}.network=lan
  					set wireless.default_${dev}.mode=ap
  					set wireless.default_${dev}.ssid=${ssid}
 -					set wireless.default_${dev}.encryption=none
 +					set wireless.default_${dev}.encryption=${encryption}
- EOF
- 				uci -q commit wireless
- 			}
 EOF
 
 patch -p1 -E < version.patch && rm -f version.patch
