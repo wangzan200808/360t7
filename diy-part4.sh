@@ -57,41 +57,6 @@ cat > version.patch  <<EOF
 -OPENWRT_RELEASE="%D %V %C"
 +OPENWRT_RELEASE="%D $VERSION By Zan %C"
  OPENWRT_BUILD_DATE="%B"
-
---- a/package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
-+++ b/package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
-@@ -20,17 +20,21 @@
- 					hwmode="11g"
- 					htmode="HE40"
- 					htbsscoex="1"
--					ssid="ImmortalWrt-2.4G"
-+					ssid="3602.4"
-+					encryption="psk-mixed"
-+					key="wz123456"
- 					dbdc_main="1"
- 					txpower="100"
--					channel="auto"
-+					channel="11"
- 				else
- 					band="5g"
- 					hwmode="11a"
- 					htmode="HE160"
- 					htbsscoex="0"
--					ssid="ImmortalWrt-5G"
--					channel="36"
-+					ssid="360"
-+					channel="44"
-+					encryption="sae-mixed"
-+					key="wz123456"
- 					txpower="100"
- 					dbdc_main="0"
- 				fi
-@@ -54,5 +58,5 @@
- 					set wireless.default_${dev}.network=lan
- 					set wireless.default_${dev}.mode=ap
- 					set wireless.default_${dev}.ssid=${ssid}
--					set wireless.default_${dev}.encryption=none
-+					set wireless.default_${dev}.encryption=${encryption}
 EOF
 
 patch -p1 -E < version.patch && rm -f version.patch
