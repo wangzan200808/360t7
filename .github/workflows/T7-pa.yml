@@ -71,6 +71,12 @@ jobs:
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
+    -  name: rm hengyangtek
+       run: |
+        cd openwrt
+        rm -rf package/boot/uboot-mediatek/patches/344-mtd-spinand-add-support-for-HeYangTek-HYF1GQ4UDACAE.patch
+        rm -rf target/linux/mediatek/patches-6.6/344-mtd-spinand-add-support-for-HeYangTek-HYF1GQ4UDACAE.patch
+
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
